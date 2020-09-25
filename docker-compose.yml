@@ -1,0 +1,33 @@
+version: "3"
+services:
+  api:
+    container_name: itau_api
+    image: node:latest
+    networks:
+      - rede
+    ports:
+      - "3333:3333"
+    command: sh -c "npm i && npm start dist/server.js"
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    environment:
+      NODE_ENV: production
+  frontend:
+    container_name: itau_frontend
+    image: node:latest
+    depends_on:
+      - api
+    networks:
+      - rede
+    ports:
+      - "5000:5000"
+    command: sh -c "npm i && npm run build && npm install -g serve && serve -s build"
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+    environment:
+      NODE_ENV: production
+    stdin_open: true
+networks:
+  rede:

@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  api:
+    container_name: itau_api
+    image: node:latest
+    networks:
+      - rede
+    ports:
+      - "3333:3333"
+    command: sh -c "npm i && npm start dist/server.js"
+    depends_on:
+      - mongo
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    environment:
+      NODE_ENV: production
+  # client:
+  #   container_name: vtex_client
+  #   image: node:10
+  #   networks:
+  #     - base
+  #     - mongo
+  #   ports:
+  #     - "3000:3000"
+  #   command: sh -c "npm i && npm run start"
+  #   depends_on:
+  #     - mongo
+  #   working_dir: /app
+  #   volumes:
+  #     - ./vtex-megahack-client:/app
+  #   environment:
+  #     NODE_ENV: development
+  #   stdin_open: true
+networks:
+  rede:
+
