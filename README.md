@@ -20,8 +20,8 @@ Para executar o projeto execute o seguinte comando: 🚀
 
 <h2>Web Front</h1>
 <p align="center">
-  <img src="./src/assets/1.png" />
-  <img src="./src/assets/2.png" />
+  <img src="./frontend/src/assets/1.png" />
+  <img src="./frontend/src/assets/2.png" />
 </p>
 
 
