@@ -23,32 +23,24 @@ class UpdateTeacherService {
   }: IRequest): Promise<Teachers> {
     const teachersRepository = new TeachersRepository();
 
-    const teacher = await teachersRepository.findById(id);
+    const teacherExists = await teachersRepository.findById(id);
 
-    if (!teacher) {
+    if (!teacherExists) {
       throw new AppError("Teacher not found", 401);
     }
 
-    if (materials) {
-      const materialsExists = await teachersRepository.findByIds(materials);
-
-      const teacher = await teachersRepository.save({
-        id,
-        name,
-        age,
-        materials: materialsExists,
-      });
-
-      return teacher;
-    } else {
-      const teacher = await teachersRepository.save({
-        id,
-        name,
-        age,
-      });
-
-      return teacher;
+    if (!materials) {
+      throw new AppError("Material necessary");
     }
+
+    const teacher = await teachersRepository.save({
+      id,
+      name,
+      age,
+      materials,
+    });
+
+    return teacher;
   }
 }
 

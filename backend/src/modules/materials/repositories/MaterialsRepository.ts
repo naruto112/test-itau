@@ -1,6 +1,5 @@
 import { Repository, getRepository } from "typeorm";
 import Materials from "../entities/Materials";
-import Teachers from "../../teachers/entities/Teachers";
 
 interface ICreateTeacher {
   id: string;
@@ -14,11 +13,9 @@ interface ICreateMaterials {
 
 class MaterialsRepository {
   private ormRepository: Repository<Materials>;
-  private ormRepositoryTeachers: Repository<Teachers>;
 
   constructor() {
     this.ormRepository = getRepository(Materials);
-    this.ormRepositoryTeachers = getRepository(Teachers);
   }
 
   public async create(materialData: ICreateMaterials): Promise<Materials> {
@@ -35,14 +32,19 @@ class MaterialsRepository {
     return material;
   }
 
-  public async findByIds(teachersData: ICreateTeacher[]): Promise<Teachers[]> {
-    const teachers = this.ormRepositoryTeachers.findByIds(teachersData);
+  public async findByMaterials(id: string): Promise<ICreateMaterials[]> {
+    const materials = await this.ormRepository.find({
+      relations: ["teachers"],
+      where: { id },
+    });
 
-    return teachers;
+    return materials;
   }
 
   public async findAll(): Promise<Materials[]> {
-    const materials = this.ormRepository.find({ relations: ["teachers"] });
+    const materials = await this.ormRepository.find({
+      relations: ["teachers"],
+    });
 
     return materials;
   }

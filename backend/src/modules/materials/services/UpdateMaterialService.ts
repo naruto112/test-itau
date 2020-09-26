@@ -14,33 +14,30 @@ interface IRequest {
 }
 
 class UpdateMaterialService {
-  public async execute({ id, name, teachers }: IRequest): Promise<Materials> {
+  public async execute({
+    id,
+    name,
+    teachers,
+  }: IRequest): Promise<Materials | undefined> {
     const materialsRepository = new MaterialsRepository();
 
-    const material = await materialsRepository.findById(id);
+    const materialExists = await materialsRepository.findById(id);
 
-    if (!material) {
-      throw new AppError("Material not found");
+    if (!materialExists) {
+      throw new AppError("Material not found", 401);
     }
 
-    if (teachers) {
-      const teachersExists = await materialsRepository.findByIds(teachers);
-
-      const material = await materialsRepository.save({
-        id,
-        name,
-        teachers: teachersExists,
-      });
-
-      return material;
-    } else {
-      const teacher = await materialsRepository.save({
-        id,
-        name,
-      });
-
-      return teacher;
+    if (!teachers) {
+      throw new AppError("Techers necessary", 401);
     }
+
+    const material = await materialsRepository.save({
+      id,
+      name,
+      teachers,
+    });
+
+    return material;
   }
 }
 

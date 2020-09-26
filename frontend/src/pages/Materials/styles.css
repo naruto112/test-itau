@@ -113,3 +113,28 @@
   font-size: 24px;
   margin-bottom: 20px;
 }
+
+.btn-include {
+  width: 70%;
+  height: 30px;
+  background: #ec7000;
+  border: 0;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 16px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 60px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 16px;
+  transition: filter 0.2s;
+}
+
+.btn-include:hover {
+  filter: brightness(90%);
+}

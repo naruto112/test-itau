@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
-// import api from "../../services/api";
+import api from "../../services/api";
 
 import logoImg from "../../assets/logo-itau.png";
 
@@ -11,6 +11,7 @@ import "./styles.css";
 export default function Profile() {
   const [name, setName] = useState("");
   const [register, setRegister] = useState("");
+  const [newRegister, setNewRegister] = useState("");
   const history = useHistory();
   const token = localStorage.getItem("school@register");
 
@@ -26,18 +27,16 @@ export default function Profile() {
   async function handleNewIncident(e) {
     e.preventDefault();
 
-    // const data = {
-    //   name,
-    //   register,
-    // };
+    const data = {
+      name,
+      register,
+      newRegister,
+    };
 
     try {
-      // await api.post("incidents", data, {
-      //   headers: {
-      //     Authorization: ongId,
-      //   },
-      // });
-      // history.push("/profile");
+      await api.put("students", data);
+      alert("Atualização feita com sucesso");
+      history.push("/dashboard");
     } catch (err) {
       alert("Erro ao cadastrar caso, tente novamente");
     }
@@ -65,6 +64,11 @@ export default function Profile() {
             placeholder="RC"
             value={register}
             onChange={(e) => setRegister(e.target.value)}
+          />
+          <input
+            placeholder="Novo RC"
+            value={newRegister}
+            onChange={(e) => setNewRegister(e.target.value)}
           />
           <button className="button" type="submit">
             Gravar

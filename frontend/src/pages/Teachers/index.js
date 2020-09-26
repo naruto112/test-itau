@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { FiArrowLeft, FiPlus } from "react-icons/fi";
 
 import Header from "../../components/Header";
+import ModalAddTeacher from "../../components/ModalAddTeacher";
 import api from "../../services/api";
 
 import coachingImg from "../../assets/professor.svg";
@@ -16,6 +17,7 @@ export default function Teachers() {
   const register = localStorage.getItem("school@register");
   const [teachers, setTeachers] = useState([]);
   const [teacherMaterials, setTeacherMaterials] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -36,11 +38,21 @@ export default function Teachers() {
     const teacher = teachers.filter((material) => id === material.id);
     setTeacherMaterials(...teacher);
   };
+
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
   return (
     <>
       <div className="header">
         <Header />
       </div>
+      <ModalAddTeacher
+        isOpen={modalOpen}
+        setIsOpen={toggleModal}
+        teacher={teachers}
+      />
       {teacherMaterials.length === 0 ? (
         <div className="teacher-container">
           <h1>
@@ -49,7 +61,7 @@ export default function Teachers() {
               <Link className="back-link" to="/dashboard">
                 <FiArrowLeft size={16} color="#EC7000" />
               </Link>
-              <button className="back-link">
+              <button className="back-link" onClick={() => setModalOpen(true)}>
                 <FiPlus size={16} color="#EC7000" />
               </button>
             </div>

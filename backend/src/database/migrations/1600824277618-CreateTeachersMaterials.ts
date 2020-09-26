@@ -42,7 +42,7 @@ export class CreateTeachersMaterials1600824277618
         columnNames: ["material_id"],
         referencedColumnNames: ["id"],
         referencedTableName: "materials",
-        name: "fk_materials_teachers",
+        name: "fk_materials_teachers_",
         onDelete: "CASCADE",
         onUpdate: "SET NULL",
       })

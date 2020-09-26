@@ -5,6 +5,7 @@ interface ICreateStudent {
   id?: string;
   name: string;
   register: string;
+  newRegister?: string;
 }
 
 class StudentsRepository {
@@ -20,6 +21,10 @@ class StudentsRepository {
     await this.ormRepository.save(student);
 
     return student;
+  }
+
+  public async update(studentData: ICreateStudent): Promise<Students> {
+    return await this.ormRepository.save(studentData);
   }
 
   public async findByRegister(register: string): Promise<Students | undefined> {

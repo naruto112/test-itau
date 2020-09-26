@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import CreateStudentService from "../services/CreateStudentService";
 import AuthStudentService from "../services/AuthStudentService";
+import UpdateStudentService from "../services/UpdateStudentService";
 
 class StudentsController {
   public async create(request: Request, response: Response): Promise<Response> {
@@ -11,6 +12,20 @@ class StudentsController {
     const student = await createStudentService.execute({
       name,
       register,
+    });
+
+    return response.json(student);
+  }
+
+  public async update(request: Request, response: Response): Promise<Response> {
+    const updateStudentService = new UpdateStudentService();
+
+    const { name, register, newRegister } = request.body;
+
+    const student = await updateStudentService.execute({
+      name,
+      register,
+      newRegister,
     });
 
     return response.json(student);
