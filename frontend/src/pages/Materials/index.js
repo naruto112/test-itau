@@ -111,8 +111,8 @@ export default function Materials() {
           </h1>
           <div className="teacher-menu">
             <li className="main-material">
-              <strong>{materialTeachers.name}</strong>
               <img src={livroTeacherImg} alt="Material the Teachers" />
+              <strong>{materialTeachers.name}</strong>
               <button
                 className="btn-include"
                 onClick={() => setModalOpenTeachers(true)}
