@@ -14,6 +14,9 @@ Para executar o projeto execute o seguinte comando: 🚀
 
 ```js
     docker-compose up 🥊
+    ou
+    npm start 
+    npm dev:server
 ```
 
 # Imagens 📷
