@@ -31,6 +31,11 @@ Obs: caso não tenha docker execute o comando abaixo:
   <img src="./frontend/src/assets/3.png" />
   <img src="./frontend/src/assets/4.png" />
   <img src="./frontend/src/assets/5.png" />
+  <img src="./frontend/src/assets/6.png" />
+  <img src="./frontend/src/assets/7.png" />
+  <img src="./frontend/src/assets/8.png" />
+  <img src="./frontend/src/assets/9.png" />
+  <img src="./frontend/src/assets/10.png" />
 </p>
 
 
